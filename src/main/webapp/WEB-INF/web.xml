@@ -3,6 +3,7 @@
    <data-source>
      <name>java:app/ProdDS</name>
      <class-name>org.apache.derby.jdbc.ClientXADataSource</class-name>
+<!--     <class-name>org.apache.derby.jdbc.ClientDataSource</class-name>-->
      <server-name>localhost</server-name>
      <port-number>1527</port-number>
      <database-name>/home/fwelland/Databases/Prod</database-name>

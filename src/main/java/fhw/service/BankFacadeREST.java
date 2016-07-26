@@ -1,11 +1,13 @@
-
 package fhw.service;
 
 import fhw.Bank;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,12 +18,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Stateless
-@Path("bank")
-public class BankFacadeREST extends AbstractFacade<Bank> {
+@ApplicationScoped
+@Path("bank")   
+public class BankFacadeREST 
+    extends AbstractFacade<Bank>
+{
 
-    @PersistenceContext(unitName = "ProdPU")
-    private EntityManager em;
+    //@PersistenceContext(unitName = "ProdPU")
+     @PersistenceUnit(name = "ProdPU")
+    private EntityManagerFactory emf;
 
     public BankFacadeREST() {
         super(Bank.class);
@@ -77,6 +82,6 @@ public class BankFacadeREST extends AbstractFacade<Bank> {
 
     @Override
     protected EntityManager getEntityManager() {
-        return em;
+        return emf.createEntityManager();
     }
 }
